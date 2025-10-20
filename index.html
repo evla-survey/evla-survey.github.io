@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Survey on Efficient Vision-Language-Action Models</title>
+    <style>
+        /* ========== Global Styles ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #4F46E5;
+            --secondary-color: #3B82F6;
+            --text-dark: #1F2937;
+            --text-light: #6B7280;
+            --bg-light: #F9FAFB;
+            --bg-white: #FFFFFF;
+            --border-color: #E5E7EB;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: #F5F5F5;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ========== Header/Navigation ========== */
+        .header {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        .logo-img:hover {
+            transform: translateY(-5px) scale(1.1) rotate(2deg);
+            filter: drop-shadow(0 10px 20px rgba(79, 70, 229, 0.3)) brightness(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile menu toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* ========== Hero Section ========== */
+        .hero {
+            max-width: 1200px;
+            margin: 2rem auto 0.5rem;
+            padding: 2rem 2rem;
+            text-align: center;
+        }
+
+        .publication-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #DC2626 0%, #EF4444 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+            animation: fadeInDown 0.6s ease;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0;
+            line-height: 1.2;
+            animation: fadeInUp 0.8s ease;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .hero-title:hover {
+            transform: scale(1.05);
+            letter-spacing: 2px;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: all 0.4s ease;
+            display: inline-block;
+        }
+
+        .hero-title:hover span {
+            transform: translateY(-3px);
+            filter: drop-shadow(0 5px 15px rgba(79, 70, 229, 0.4));
+        }
+
+        /* ========== Authors Section ========== */
+        .authors-section {
+            max-width: 1000px;
+            margin: 0.5rem auto 1.5rem;
+            padding: 0 2rem;
+            text-align: center;
+            animation: fadeIn 1s ease;
+        }
+
+        .authors-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .author {
+            color: var(--secondary-color);
+            font-size: 1.1rem;
+            font-weight: 500;
+            position: relative;
+            transition: transform 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .author:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .author sup {
+            font-size: 0.75rem;
+            margin-left: 2px;
+        }
+
+        .affiliations {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-top: 1.5rem;
+        }
+
+        .affiliation-item {
+            margin: 0.5rem 0;
+        }
+
+        .corresponding {
+            font-style: italic;
+            margin-top: 1rem;
+            color: var(--text-light);
+        }
+
+        /* ========== Action Buttons ========== */
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem auto;
+            max-width: 900px;
+            padding: 0 2rem;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--bg-white);
+            color: var(--text-dark);
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-dark {
+            background: #2D3748;
+            color: white;
+        }
+
+        .btn-dark:hover {
+            background: #1A202C;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ========== Overview Section ========== */
+        .overview-section {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem 2rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            animation: fadeInUp 1.4s ease;
+        }
+
+        .overview-section.no-background {
+            background: transparent;
+            box-shadow: none;
+            padding: 1rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .abstract-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            text-align: justify;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .abstract-link {
+            color: #3B82F6;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .abstract-link:hover {
+            filter: brightness(1.2);
+        }
+
+        .overview-image {
+            width: 100%;
+            max-width: 1000px;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .overview-image:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ========== Footer ========== */
+        .footer {
+            background: #1F2937;
+            color: #9CA3AF;
+            padding: 2rem 2rem 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #9CA3AF;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* ========== Animations ========== */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========== Responsive Design ========== */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1rem;
+                transition: left 0.3s ease;
+                box-shadow: var(--shadow-lg);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+                white-space: normal;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.75rem;
+                white-space: normal;
+            }
+
+            .author {
+                font-size: 0.95rem;
+            }
+
+            .nav-container {
+                padding: 1rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo">
+                <img src="tongji-logo.png" alt="Tongji University" class="logo-img">
+                <img src="uestc-logo.png" alt="UESTC" class="logo-img">
+            </div>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#abstract">Abstract</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="hero-title">
+            A Survey on <span>Efficient Vision-Language-Action Models</span>
+        </h1>
+    </section>
+
+    <!-- Authors Section -->
+    <section class="authors-section">
+        <div class="authors-grid">
+            <span class="author">Zhaoshu Yu<sup>(c)</sup></span>
+            <span class="author">Bo Wang<sup>(c)</sup></span>
+            <span class="author">Haonan Zhang<sup>()</sup></span>
+            <span class="author">Pengpeng Zeng<sup>()*</sup></span>
+            <span class="author">Lianli Gao<sup>()</sup></span>
+            <span class="author">Jingkuan Song<sup>()</sup></span>
+            <span class="author">Heng Tao Shen<sup>()</sup></span>
+        </div>
+        <div class="affiliations">
+            <div class="affiliation-item">
+                <sup>(a)</sup> Future Media Center and School of Computer Science and Engineering, University of Electronic Science and Technology of China
+            </div>
+            <div class="affiliation-item">
+                <sup>(b)</sup> Sichuan Artificial Intelligence Research Institute, Yibin, China
+            </div>
+            <div class="affiliation-item">
+                <sup>(c)</sup> School of Computer Science and Technology, Tongji University, China
+            </div>
+            <div class="affiliation-item">
+                <sup>(d)</sup> Shenzhen Institute for Advanced Study, University of Electronic Science and Technology of China
+            </div>
+        </div>
+    </section>
+
+    <!-- Action Buttons -->
+    <section class="action-buttons">
+        <a href="https://github.com/YuZhaoshu/Efficient-VLA-Survey" target="_blank" class="btn btn-primary">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+            GitHub
+        </a>
+        <a href="#" class="btn btn-secondary">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M5.523 12.424c.14-.082.293-.162.459-.238a7.878 7.878 0 0 1-.45.606c-.28.337-.498.516-.635.572a.266.266 0 0 1-.035.012.282.282 0 0 1-.026-.044c-.056-.11-.054-.216.04-.36.106-.165.319-.354.647-.548zm2.455-1.647c-.119.025-.237.05-.356.078a21.148 21.148 0 0 0 .5-1.05 12.045 12.045 0 0 0 .51.858c-.217.032-.436.07-.654.114zm2.525.939a3.881 3.881 0 0 1-.435-.41c.228.005.434.022.612.054.317.057.466.147.518.209a.095.095 0 0 1 .026.064.436.436 0 0 1-.06.2.307.307 0 0 1-.094.124.107.107 0 0 1-.069.015c-.09-.003-.258-.066-.498-.256zM8.278 6.97c-.04.244-.108.524-.2.829a4.86 4.86 0 0 1-.089-.346c-.076-.353-.087-.63-.046-.822.038-.177.11-.248.196-.283a.517.517 0 0 1 .145-.04c.013.03.028.092.032.198.005.122-.007.277-.038.464z"/>
+                <path fill-rule="evenodd" d="M4 0h5.293A1 1 0 0 1 10 .293L13.707 4a1 1 0 0 1 .293.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm5.5 1.5v2a1 1 0 0 0 1 1h2l-3-3zM4.165 13.668c.09.18.23.343.438.419.207.075.412.04.58-.03.318-.13.635-.436.926-.786.333-.401.683-.927 1.021-1.51a11.651 11.651 0 0 1 1.997-.406c.3.383.61.713.91.95.28.22.603.403.934.417a.856.856 0 0 0 .51-.138c.155-.101.27-.247.354-.416.09-.181.145-.37.138-.563a.844.844 0 0 0-.2-.518c-.226-.27-.596-.4-.96-.465a5.76 5.76 0 0 0-1.335-.05 10.954 10.954 0 0 1-.98-1.686c.25-.66.437-1.284.52-1.794.036-.218.055-.426.048-.614a1.238 1.238 0 0 0-.127-.538.7.7 0 0 0-.477-.365c-.202-.043-.41 0-.601.077-.377.15-.576.47-.651.823-.073.34-.04.736.046 1.136.088.406.238.848.43 1.295a19.697 19.697 0 0 1-1.062 2.227 7.662 7.662 0 0 0-1.482.645c-.37.22-.699.48-.897.787-.21.326-.275.714-.08 1.103z"/>
+            </svg>
+            PDF Paper
+        </a>
+        <a href="#" class="btn btn-secondary">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0h13A1.5 1.5 0 0 1 16 1.5v2A1.5 1.5 0 0 1 14.5 5h-13A1.5 1.5 0 0 1 0 3.5v-2zm1.5-.5a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-13z"/>
+                <path d="M0 8.5A1.5 1.5 0 0 1 1.5 7h13A1.5 1.5 0 0 1 16 8.5v2a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 10.5v-2zm1.5-.5a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-13z"/>
+            </svg>
+            arXiv
+        </a>
+        <a href="#" class="btn btn-dark">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+            </svg>
+            Post (X)
+        </a>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="overview-section no-background" id="overview">
+        <h2 class="section-title">Overview</h2>
+        <img src="TOC.png" alt="Table of Contents" class="overview-image">
+    </section>
+
+    <!-- Abstract Section -->
+    <section class="overview-section" id="abstract">
+        <h2 class="section-title">Abstract</h2>
+        <p class="abstract-text">
+            Recently, Vision-Language-Action Models (VLAs) have emerged as a prominent research frontier in embodied intelligence, sparking growing efforts to transfer generalist capabilities from the digital domains to the physical world. By leveraging the rich world knowledge embedded in large-scale foundation models, VLAs have progressed from task-specific policies into versatile and generalized intelligent robotic systems. Despite progress, the substantial computational demands of the large-scale foundation models, e.g., extensive model size and high training and inference costs, continue to pose major challenges for real-world deployment of VLAs, particularly in resource-constrained environments. In this survey, we aim to systematically review the emerging field of Efficient Vision-Language-Action Models (EVLAs). We begin by outlining the canonical architectures of VLAs and introducing a unified taxonomy of efficiency-oriented strategies along three key dimensions: (1) <strong>Efficient Model Design</strong>, including highly efficient architectures and model compression, (2) <strong>Efficient Training</strong>, encompassing both pre-training optimization and post-training adaptation, and (3) <strong>Efficient Data Collection</strong>, covering data acquisition, curation, and synthetic generation. As the first dedicated survey on efficient VLAs, this work establishes a foundational framework for the community and highlights critical pathways toward scalable, deployable, and sustainable embodied intelligent systems. For a complete list of the literature on efficient VLAs reviewed, please visit our curated repository at: <a href="https://github.com/YuZhaoshu/Efficient-VLA-Survey" target="_blank" class="abstract-link">https://github.com/YuZhaoshu/Efficient-VLA-Survey</a>
+        </p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="footer-content">
+            <div class="footer-links">
+            <p style="margin-top: 1rem; font-size: 0.9rem;">
+                If you have any questions or suggestions, please feel free to contact 
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to header
+        let lastScroll = 0;
+        const header = document.querySelector('.header');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll <= 0) {
+                header.style.boxShadow = 'var(--shadow-sm)';
+            } else {
+                header.style.boxShadow = 'var(--shadow-md)';
+            }
+
+            lastScroll = currentScroll;
+        });
+
+    </script>
+</body>
+</html>
