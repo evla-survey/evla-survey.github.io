@@ -16,30 +16,30 @@
         }
 
         :root {
-            --primary-color: #4F46E5;
-            --secondary-color: #3B82F6;
-            --text-dark: #1F2937;
-            --text-light: #6B7280;
-            --bg-light: #F9FAFB;
+            --primary-color: #6B6458;
+            --secondary-color: #8E8578;
+            --text-dark: #1A1612;
+            --text-light: #4A433B;
+            --bg-light: #F9F8F7;
             --bg-white: #FFFFFF;
-            --border-color: #E5E7EB;
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
-            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+            --border-color: #DCD9D6;
+            --shadow-sm: 0 1px 3px rgba(26, 22, 18, 0.08);
+            --shadow-md: 0 4px 6px rgba(26, 22, 18, 0.1);
+            --shadow-lg: 0 10px 25px rgba(26, 22, 18, 0.12);
         }
 
         body {
-            font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-family: "Lucida Console", Monaco, monospace;
             line-height: 1.6;
             color: var(--text-dark);
-            background: #F5F5F5;
+            background: var(--bg-light);
             min-height: 100vh;
             overflow-x: hidden;
         }
 
         /* ========== Header/Navigation ========== */
         .header {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: var(--shadow-sm);
             position: sticky;
@@ -77,7 +77,7 @@
 
         .logo-img:hover {
             transform: translateY(-5px) scale(1.1) rotate(2deg);
-            filter: drop-shadow(0 10px 20px rgba(79, 70, 229, 0.3)) brightness(1.05);
+            filter: drop-shadow(0 10px 20px rgba(107, 100, 88, 0.3)) brightness(1.05);
         }
 
         .nav-links {
@@ -133,13 +133,13 @@
         .hero {
             max-width: 1200px;
             margin: 2rem auto 0.5rem;
-            padding: 2rem 2rem;
-            text-align: center;
+            padding: 2rem;
+            text-align: left;
         }
 
         .publication-badge {
             display: inline-block;
-            background: linear-gradient(135deg, #DC2626 0%, #EF4444 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3E3529 100%);
             color: white;
             padding: 0.5rem 1.5rem;
             border-radius: 50px;
@@ -151,17 +151,21 @@
         }
 
         .hero-title {
-            font-family: 'EB Garamond', 'Times New Roman', serif;
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 0;
+            font-family: "Lucida Console", Monaco, monospace;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #000000;
+            margin: 0;
+            padding: 0;
             line-height: 1.3;
             animation: fadeInUp 0.8s ease;
             white-space: nowrap;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            letter-spacing: 0.5px;
+            letter-spacing: 0px;
+            text-align: left;
+            display: block;
+            transform-origin: left center;
         }
 
         .hero-title:hover {
@@ -170,17 +174,14 @@
         }
 
         .hero-title span {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #000000;
             transition: all 0.4s ease;
             display: inline-block;
         }
 
         .hero-title:hover span {
             transform: translateY(-3px);
-            filter: drop-shadow(0 5px 15px rgba(79, 70, 229, 0.4));
+            filter: drop-shadow(0 5px 15px rgba(107, 100, 88, 0.4));
         }
 
         /* ========== Authors Section ========== */
@@ -207,7 +208,7 @@
             position: relative;
             transition: transform 0.3s ease, color 0.3s ease;
             cursor: pointer;
-            border-bottom: 1px dashed #D1D5DB;
+            border-bottom: 1px dashed var(--border-color);
             padding-bottom: 2px;
         }
 
@@ -224,7 +225,7 @@
 
         .affiliations {
             font-size: 0.95rem;
-            color: var(--text-light);
+            color: var(--text-dark);
             line-height: 1.8;
             margin-top: 1.5rem;
         }
@@ -236,7 +237,7 @@
         .corresponding {
             font-style: italic;
             margin-top: 1rem;
-            color: var(--text-light);
+            color: var(--text-dark);
         }
 
         /* ========== Action Buttons ========== */
@@ -267,7 +268,7 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(135deg, var(--primary-color), #3E3529);
             color: white;
         }
 
@@ -290,24 +291,24 @@
         }
 
         .btn-dark {
-            background: #2D3748;
+            background: var(--text-dark);
             color: white;
         }
 
         .btn-dark:hover {
-            background: #1A202C;
+            background: #0D0A08;
             transform: translateY(-3px);
             box-shadow: var(--shadow-lg);
         }
 
         /* ========== Overview Section ========== */
         .overview-section {
-            max-width: 1200px;
+            max-width: 1600px;
             margin: 2rem auto;
             padding: 2rem 2rem;
-            background: white;
+            background: transparent;
             border-radius: 16px;
-            box-shadow: var(--shadow-md);
+            box-shadow: none;
             animation: fadeInUp 1.4s ease;
         }
 
@@ -319,28 +320,28 @@
 
         .section-title {
             font-size: 2rem;
-            font-weight: 700;
+            font-weight: 800;
             text-align: center;
             margin-bottom: 1.5rem;
-            color: var(--text-dark);
+            color: #000000;
         }
 
         .abstract-text {
             font-size: 1.05rem;
             line-height: 1.8;
-            color: var(--text-light);
+            color: var(--text-dark);
             text-align: justify;
-            max-width: 1000px;
+            max-width: 2100px;
             margin: 0 auto;
         }
 
         .abstract-link {
-            color: #3B82F6;
+            color: var(--primary-color);
             text-decoration: none;
             font-weight: 500;
             position: relative;
             transition: color 0.3s ease;
-            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -368,8 +369,8 @@
 
         /* ========== Footer ========== */
         .footer {
-            background: #1F2937;
-            color: #9CA3AF;
+            background: var(--primary-color);
+            color: var(--bg-light);
             padding: 2rem 2rem 1.5rem;
             margin-top: 3rem;
         }
@@ -389,13 +390,13 @@
         }
 
         .footer-links a {
-            color: #9CA3AF;
+            color: var(--bg-light);
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         .footer-links a:hover {
-            color: white;
+            color: var(--bg-white);
         }
 
         /* ========== Animations ========== */
@@ -438,7 +439,7 @@
                 left: -100%;
                 width: 100%;
                 height: calc(100vh - 70px);
-                background: white;
+                background: var(--bg-white);
                 flex-direction: column;
                 padding: 2rem;
                 gap: 1rem;
@@ -455,7 +456,7 @@
             }
 
             .hero-title {
-                font-size: 2rem;
+                font-size: 2.5rem;
                 white-space: normal;
             }
 
@@ -471,7 +472,7 @@
 
         @media (max-width: 480px) {
             .hero-title {
-                font-size: 1.75rem;
+                font-size: 2.2rem;
                 white-space: normal;
             }
 
@@ -481,6 +482,315 @@
 
             .nav-container {
                 padding: 1rem;
+            }
+        }
+
+        /* ========== Paper List Section ========== */
+        .paper-list-section {
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 2rem;
+            animation: fadeInUp 1.6s ease;
+        }
+
+        .search-filter-container {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 0.875rem 1.25rem;
+            font-family: "Lucida Console", Monaco, monospace;
+            font-size: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            background: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(107, 100, 88, 0.1);
+        }
+
+        .filter-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-label {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .category-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .filter-btn {
+            padding: 0.625rem 1.25rem;
+            border: 2px solid var(--border-color);
+            background: var(--bg-light);
+            color: var(--text-dark);
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: "Lucida Console", Monaco, monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--primary-color), #3E3529);
+            color: white;
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-md);
+        }
+
+        .subcategory-container {
+            margin-top: 1rem;
+            padding-left: 1.5rem;
+            display: none;
+        }
+
+        .subcategory-container.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .mid-category-group {
+            margin-bottom: 1rem;
+        }
+
+        .mid-category-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .subsubcategory-container {
+            margin-top: 0.75rem;
+            padding-left: 1.5rem;
+            display: none;
+        }
+
+        .subsubcategory-container.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .filter-btn-small {
+            font-size: 0.85rem;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #F5F3F1, #E8E5E2);
+        }
+
+        /* ========== Paper Table - Unified Layout Control ========== */
+        .paper-table-container {
+            background: var(--bg-white);
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+
+        .paper-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        /* Table Header - Unified Style */
+        .paper-table thead {
+            background: linear-gradient(135deg, var(--primary-color), #3E3529);
+            color: white;
+        }
+
+        .paper-table th {
+            padding: 1rem 1.25rem;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        /* Table Body - Unified Style for All Cells */
+        .paper-table td {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            vertical-align: middle;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .paper-table tbody tr {
+            transition: all 0.2s ease;
+        }
+
+        .paper-table tbody tr:hover {
+            background: var(--bg-light);
+            transform: scale(1.005);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .paper-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Column 1: Model/Method - Unified Style */
+        .paper-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        .paper-name a {
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            border-bottom: 1px dashed transparent;
+        }
+
+        .paper-name a:hover {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        /* Column 2: Year - Unified Style */
+        .paper-year {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+        }
+
+        /* Column 3: Category - Unified Style */
+        .category-badges {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 0.35rem 0.75rem;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .category-badge-main {
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        .category-badge-sub {
+            font-size: 0.85rem;
+            background: var(--bg-white);
+            border-style: dashed;
+        }
+
+        /* Column 4: Innovation - Unified Style */
+        .innovation-text {
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-around;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: var(--bg-white);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .paper-table-container {
+                overflow-x: auto;
+            }
+
+            .paper-table {
+                font-size: 0.85rem;
+            }
+
+            .paper-table th,
+            .paper-table td {
+                padding: 0.75rem;
+            }
+
+            .category-filters {
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                font-size: 0.85rem;
+                padding: 0.5rem 1rem;
+            }
+
+            .stats-bar {
+                flex-direction: column;
             }
         }
 
@@ -502,6 +812,7 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="#overview">Overview</a></li>
                 <li><a href="#abstract">Abstract</a></li>
+                <li><a href="#paper-list">Paper List</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -521,7 +832,6 @@
             <span class="author">Bo Wang<sup>(c)</sup></span>
             <a href="https://zchoi.github.io/" target="_blank" class="author" style="text-decoration: none;">Haonan Zhang<sup>()</sup></a>
             <span class="author">Pengpeng Zeng<sup>()*</sup></span>
-            <a href="https://lianligao.github.io/" target="_blank" class="author" style="text-decoration: none;">Lianli Gao<sup>()</sup></a>
             <a href="https://jingkuansong.github.io/index.html" target="_blank" class="author" style="text-decoration: none;">Jingkuan Song<sup>()</sup></a>
             <span class="author">Heng Tao Shen<sup>()</sup></span>
         </div>
@@ -543,7 +853,7 @@
 
     <!-- Action Buttons -->
     <section class="action-buttons">
-        <a href="https://github.com/YuZhaoshu/Efficient-VLA-Survey" target="_blank" class="btn btn-primary">
+        <a href="https://github.com/YuZhaoshu/Efficient-VLA-Survey" target="_blank" class="btn btn-secondary">
             <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
                 <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
             </svg>
@@ -562,7 +872,7 @@
             </svg>
             arXiv
         </a>
-        <a href="#" class="btn btn-dark">
+        <a href="#" class="btn btn-secondary">
             <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
                 <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
             </svg>
@@ -584,12 +894,92 @@
         </p>
     </section>
 
+    <!-- Paper List Section -->
+    <section class="paper-list-section" id="paper-list">
+        <h2 class="section-title">Paper List</h2>
+
+        <!-- Statistics Bar -->
+        <div class="stats-bar">
+            <div class="stat-card">
+                <span class="stat-number" id="totalPapers">0</span>
+                <span class="stat-label">Total Papers</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="modelDesignCount">0</span>
+                <span class="stat-label">Model Design</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="trainingCount">0</span>
+                <span class="stat-label">Training</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="dataCount">0</span>
+                <span class="stat-label">Data Collection</span>
+            </div>
+        </div>
+
+        <!-- Search and Filter Container -->
+        <div class="search-filter-container">
+            <!-- Search Box -->
+            <input type="text" id="searchBox" class="search-box" placeholder="Search papers by name, category, or innovation...">
+
+            <!-- Main Category Filters -->
+            <div class="filter-section">
+                <span class="filter-label">Main Categories:</span>
+                <div class="category-filters">
+                    <button class="filter-btn active" data-category="all">All Papers</button>
+                    <button class="filter-btn" data-category="model-design">Efficient Model Design</button>
+                    <button class="filter-btn" data-category="training">Efficient Training</button>
+                    <button class="filter-btn" data-category="data">Efficient Data Collection</button>
+                </div>
+            </div>
+
+            <!-- Subcategory Filters for Model Design -->
+            <div class="subcategory-container" id="subcategory-model-design">
+                <span class="filter-label">Medium Categories:</span>
+                <!-- Add medium categories here -->
+            </div>
+
+            <!-- Subcategory Filters for Training -->
+            <div class="subcategory-container" id="subcategory-training">
+                <span class="filter-label">Medium Categories:</span>
+                <!-- Add medium categories here -->
+            </div>
+
+            <!-- Subcategory Filters for Data Collection -->
+            <div class="subcategory-container" id="subcategory-data">
+                <span class="filter-label">Medium Categories:</span>
+                <!-- Add medium categories here -->
+            </div>
+        </div>
+
+        <!-- Paper Table -->
+        <div class="paper-table-container">
+            <table class="paper-table">
+                <thead>
+                    <tr>
+                        <th style="width: 13%;">Model/Method</th>
+                        <th style="width: 7%;">Year</th>
+                        <th style="width: 24%;">Category</th>
+                        <th style="width: 56%;">Innovation</th>
+                    </tr>
+                </thead>
+                <tbody id="paperTableBody">
+                    <!-- Papers will be inserted here by JavaScript -->
+                </tbody>
+            </table>
+            <div id="noResults" class="no-results" style="display: none;">
+                No papers found matching your criteria.
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer" id="contact">
         <div class="footer-content">
             <div class="footer-links">
             <p style="margin-top: 1rem; font-size: 0.9rem;">
-                If you have any questions or suggestions, please feel free to contact 
+                If you have any questions or suggestions, please feel free to contact yuzhaoshu@gmail.com
             </p>
         </div>
     </footer>
@@ -640,6 +1030,239 @@
 
             lastScroll = currentScroll;
         });
+
+        // ========== Paper List Functionality ==========
+
+        // Paper data
+        const papers = [
+            // Add your papers here
+            // Template:
+            // {
+            //     name: "Paper Name",
+            //     url: "https://...",
+            //     year: "2025",
+            //     category: "model-design",  // or "training" or "data"
+            //     subcategory: "your-small-category",
+            //     categoryDisplay: "Model Design / Your Category Name",
+            //     innovation: "Brief description of the innovation"
+            // }
+        ];
+
+        let currentCategory = 'all';
+        let currentSubcategory = null;  // Medium category (中类)
+        let currentSubsubcategory = null;  // Small category (小类)
+        let searchQuery = '';
+
+        // Mapping from small categories to medium categories
+        const subsubToSubMap = {
+            // Add your category mappings here
+            // Template:
+            // 'small-category-name': 'medium-category-name',
+        };
+
+        // Initialize the paper list
+        function initPaperList() {
+            renderPapers();
+            updateStatistics();
+            setupEventListeners();
+        }
+
+        // Render papers based on current filters
+        function renderPapers() {
+            const tbody = document.getElementById('paperTableBody');
+            const noResults = document.getElementById('noResults');
+
+            let filteredPapers = papers.filter(paper => {
+                // Category filter (大类)
+                if (currentCategory !== 'all' && paper.category !== currentCategory) {
+                    return false;
+                }
+
+                // Subcategory filter (中类 - Medium category)
+                if (currentSubcategory) {
+                    const paperMidCategory = subsubToSubMap[paper.subcategory];
+                    if (paperMidCategory !== currentSubcategory) {
+                        return false;
+                    }
+                }
+
+                // Sub-subcategory filter (小类 - Small category)
+                if (currentSubsubcategory && paper.subcategory !== currentSubsubcategory) {
+                    return false;
+                }
+
+                // Search filter
+                if (searchQuery) {
+                    const query = searchQuery.toLowerCase();
+                    return paper.name.toLowerCase().includes(query) ||
+                           paper.categoryDisplay.toLowerCase().includes(query) ||
+                           paper.innovation.toLowerCase().includes(query);
+                }
+
+                return true;
+            });
+
+            tbody.innerHTML = '';
+
+            if (filteredPapers.length === 0) {
+                noResults.style.display = 'block';
+                return;
+            } else {
+                noResults.style.display = 'none';
+            }
+
+            filteredPapers.forEach(paper => {
+                const row = document.createElement('tr');
+
+                // Split category display into main and sub categories
+                const [mainCategory, subCategory] = paper.categoryDisplay.split(' / ');
+
+                row.innerHTML = `
+                    <td class="paper-name">
+                        <a href="${paper.url}" target="_blank">${paper.name}</a>
+                    </td>
+                    <td class="paper-year">${paper.year}</td>
+                    <td>
+                        <div class="category-badges">
+                            <span class="category-badge category-badge-main">${mainCategory}</span>
+                            <span class="category-badge category-badge-sub">${subCategory}</span>
+                        </div>
+                    </td>
+                    <td class="innovation-text">${paper.innovation}</td>
+                `;
+
+                tbody.appendChild(row);
+            });
+        }
+
+        // Update statistics
+        function updateStatistics() {
+            const modelDesign = papers.filter(p => p.category === 'model-design').length;
+            const training = papers.filter(p => p.category === 'training').length;
+            const data = papers.filter(p => p.category === 'data').length;
+
+            document.getElementById('totalPapers').textContent = papers.length;
+            document.getElementById('modelDesignCount').textContent = modelDesign;
+            document.getElementById('trainingCount').textContent = training;
+            document.getElementById('dataCount').textContent = data;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Search box
+            const searchBox = document.getElementById('searchBox');
+            searchBox.addEventListener('input', (e) => {
+                searchQuery = e.target.value;
+                renderPapers();
+            });
+
+            // Main category filters (大类)
+            const categoryButtons = document.querySelectorAll('[data-category]');
+            categoryButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active from all category buttons
+                    categoryButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    currentCategory = btn.dataset.category;
+                    currentSubcategory = null; // Reset medium category
+                    currentSubsubcategory = null; // Reset small category
+
+                    // Hide all subcategory and subsubcategory containers
+                    document.querySelectorAll('.subcategory-container').forEach(container => {
+                        container.classList.remove('active');
+                    });
+                    document.querySelectorAll('.subsubcategory-container').forEach(container => {
+                        container.classList.remove('active');
+                    });
+
+                    // Show relevant subcategory container (中类)
+                    if (currentCategory !== 'all') {
+                        const subcategoryContainer = document.getElementById(`subcategory-${currentCategory}`);
+                        if (subcategoryContainer) {
+                            subcategoryContainer.classList.add('active');
+                        }
+                    }
+
+                    // Reset button states
+                    document.querySelectorAll('[data-subcategory]').forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('[data-subsubcategory]').forEach(b => b.classList.remove('active'));
+
+                    renderPapers();
+                });
+            });
+
+            // Medium category filters (中类)
+            const subcategoryButtons = document.querySelectorAll('[data-subcategory]');
+            subcategoryButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Toggle medium category filter
+                    if (btn.classList.contains('active')) {
+                        btn.classList.remove('active');
+                        currentSubcategory = null;
+                        currentSubsubcategory = null;
+
+                        // Hide all subsubcategory containers
+                        document.querySelectorAll('.subsubcategory-container').forEach(container => {
+                            container.classList.remove('active');
+                        });
+                        document.querySelectorAll('[data-subsubcategory]').forEach(b => b.classList.remove('active'));
+                    } else {
+                        // Remove active from sibling buttons
+                        btn.parentElement.querySelectorAll('[data-subcategory]').forEach(b => {
+                            b.classList.remove('active');
+                        });
+                        btn.classList.add('active');
+                        currentSubcategory = btn.dataset.subcategory;
+                        currentSubsubcategory = null; // Reset small category
+
+                        // Hide all subsubcategory containers first
+                        document.querySelectorAll('.subsubcategory-container').forEach(container => {
+                            container.classList.remove('active');
+                        });
+
+                        // Show relevant subsubcategory container (小类)
+                        const subsubcategoryContainer = document.getElementById(`subsubcategory-${currentSubcategory}`);
+                        if (subsubcategoryContainer) {
+                            subsubcategoryContainer.classList.add('active');
+                        }
+
+                        // Reset small category button states
+                        document.querySelectorAll('[data-subsubcategory]').forEach(b => b.classList.remove('active'));
+                    }
+
+                    renderPapers();
+                });
+            });
+
+            // Small category filters (小类)
+            const subsubcategoryButtons = document.querySelectorAll('[data-subsubcategory]');
+            subsubcategoryButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Toggle small category filter
+                    if (btn.classList.contains('active')) {
+                        btn.classList.remove('active');
+                        currentSubsubcategory = null;
+                    } else {
+                        // Remove active from sibling buttons
+                        btn.parentElement.querySelectorAll('[data-subsubcategory]').forEach(b => {
+                            b.classList.remove('active');
+                        });
+                        btn.classList.add('active');
+                        currentSubsubcategory = btn.dataset.subsubcategory;
+                    }
+
+                    renderPapers();
+                });
+            });
+        }
+
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initPaperList);
+        } else {
+            initPaperList();
+        }
 
     </script>
 </body>
