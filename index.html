@@ -32,7 +32,7 @@
             font-family: "Lucida Console", Monaco, monospace;
             line-height: 1.6;
             color: var(--text-dark);
-            background: var(--bg-light);
+            background: #FCFCFB;
             min-height: 100vh;
             overflow-x: hidden;
         }
@@ -284,10 +284,10 @@
         }
 
         .btn-secondary:hover {
-            transform: translateY(-3px);
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-            box-shadow: var(--shadow-md);
+            transform: translateY(-3px) scale(1.05);
+            border-color: #2563EB;
+            color: #1E40AF;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(30, 64, 175, 0.06));
         }
 
         .btn-dark {
@@ -365,6 +365,43 @@
         .overview-image:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .overview-image-small {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .overview-image-small:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-caption {
+            font-size: 0.9rem;
+            font-style: normal;
+            color: #555555;
+            text-align: justify;
+            max-width: 1200px;
+            margin: 1.5rem auto 0;
+            line-height: 1.7;
+            padding: 0 1rem;
+        }
+
+        .image-caption strong {
+            font-weight: 700;
+            color: #333333;
+        }
+
+        .image-caption .label {
+            font-weight: 700;
+            color: var(--primary-color);
         }
 
         /* ========== Footer ========== */
@@ -828,25 +865,28 @@
     <!-- Authors Section -->
     <section class="authors-section">
         <div class="authors-grid">
-            <span class="author">Zhaoshu Yu<sup>(c)</sup></span>
-            <span class="author">Bo Wang<sup>(c)</sup></span>
-            <a href="https://zchoi.github.io/" target="_blank" class="author" style="text-decoration: none;">Haonan Zhang<sup>()</sup></a>
-            <span class="author">Pengpeng Zeng<sup>()*</sup></span>
-            <a href="https://jingkuansong.github.io/index.html" target="_blank" class="author" style="text-decoration: none;">Jingkuan Song<sup>()</sup></a>
-            <span class="author">Heng Tao Shen<sup>()</sup></span>
+            <span class="author">Zhaoshu Yu<sup>1</sup></span>
+            <span class="author">Bo Wang<sup>1</sup></span>
+            <span class="author">Pengpeng Zeng<sup>1</sup></span>
+            <a href="https://zchoi.github.io/" target="_blank" class="author" style="text-decoration: none;">Haonan Zhang<sup>1</sup></a>
+            <a href="https://jingkuansong.github.io/index.html" target="_blank" class="author" style="text-decoration: none;">Jingkuan Song<sup>1</sup></a>
+            <span class="author">Heng Tao Shen<sup>1</sup></span>
+            <span class="author">Ji Zhang<sup>2</sup></span>
+            <span class="author">Lianli Gao<sup>3</sup></span>
+            <span class="author">Nicu Sebe<sup>4</sup></span>
         </div>
         <div class="affiliations">
             <div class="affiliation-item">
-                <sup>(a)</sup> Future Media Center and School of Computer Science and Engineering, University of Electronic Science and Technology of China
+                <sup>1</sup> School of Computer Science and Technology, Tongji University, China
             </div>
             <div class="affiliation-item">
-                <sup>(b)</sup> Sichuan Artificial Intelligence Research Institute, Yibin, China
+                <sup>2</sup> School of Computing and Artificial Intelligence, Southwest Jiaotong University, China
+            </div>
+            <div class="affiliation-item" style="white-space: nowrap;">
+                <sup>3</sup> School of Computer Science and Engineering, University of Electronic Science and Technology of China, China
             </div>
             <div class="affiliation-item">
-                <sup>(c)</sup> School of Computer Science and Technology, Tongji University, China
-            </div>
-            <div class="affiliation-item">
-                <sup>(d)</sup> Shenzhen Institute for Advanced Study, University of Electronic Science and Technology of China
+                <sup>4</sup> Department of Information Engineering and Computer Science, University of Trento, Italy
             </div>
         </div>
     </section>
@@ -884,14 +924,44 @@
     <section class="overview-section no-background" id="overview">
         <h2 class="section-title">Overview</h2>
         <img src="TOC.png" alt="Table of Contents" class="overview-image">
+        <p class="image-caption"><strong>Figure: The Organization of Our Survey.</strong> We systematically categorize efficient Vision-Language-Action (VLA) models into three core pillars: (1) <strong>Efficient Model Design</strong>, encompassing efficient architectures and model compression techniques; (2) <strong>Efficient Training</strong>, covering efficient pre-training and post-training strategies; and (3) <strong>Efficient Data Collection</strong>, including efficient data collection and augmentation methods. The framework also reviews VLA foundations, key applications, and establishes the groundwork for advancing scalable embodied intelligence.</p>
     </section>
 
     <!-- Abstract Section -->
     <section class="overview-section" id="abstract">
         <h2 class="section-title">Abstract</h2>
         <p class="abstract-text">
-            Recently, Vision-Language-Action Models (VLAs) have emerged as a prominent research frontier in embodied intelligence, sparking growing efforts to transfer generalist capabilities from the digital domains to the physical world. By leveraging the rich world knowledge embedded in large-scale foundation models, VLAs have progressed from task-specific policies into versatile and generalized intelligent robotic systems. Despite progress, the substantial computational demands of the large-scale foundation models, e.g., extensive model size and high training and inference costs, continue to pose major challenges for real-world deployment of VLAs, particularly in resource-constrained environments. In this survey, we aim to systematically review the emerging field of Efficient Vision-Language-Action Models (EVLAs). We begin by outlining the canonical architectures of VLAs and introducing a unified taxonomy of efficiency-oriented strategies along three key dimensions: (1) <strong>Efficient Model Design</strong>, including highly efficient architectures and model compression, (2) <strong>Efficient Training</strong>, encompassing both pre-training optimization and post-training adaptation, and (3) <strong>Efficient Data Collection</strong>, covering data acquisition, curation, and synthetic generation. As the first dedicated survey on efficient VLAs, this work establishes a foundational framework for the community and highlights critical pathways toward scalable, deployable, and sustainable embodied intelligent systems. For a complete list of the literature on efficient VLAs reviewed, please visit our curated repository at: <a href="https://github.com/YuZhaoshu/Efficient-VLA-Survey" target="_blank" class="abstract-link">https://github.com/YuZhaoshu/Efficient-VLA-Survey</a>
+            </strong>Vision-Language-Action models (VLAs) represent a significant frontier in embodied intelligence, aiming to bridge digital knowledge with physical-world interaction. While these models have demonstrated remarkable generalist capabilities, their deployment is severely hampered by the substantial computational and data requirements inherent to their underlying large-scale foundation models. Motivated by the urgent need to address these challenges, this survey presents the first comprehensive review of <strong>Efficient Vision-Language-Action models (Efficient VLAs)</strong> across the entire data-model-training process. Specifically, we introduce a unified taxonomy to systematically organize the disparate efforts in this domain, categorizing current techniques into three core pillars: (1) <strong>Efficient Model Design</strong>, focusing on efficient architectures and model compression; (2) <strong>Efficient Training</strong>, which reduces computational burdens during model learning; and (3) <strong>Efficient Data Collection</strong>, which addresses the bottlenecks in acquiring and utilizing robotic data. Through a critical review of state-of-the-art methods within this framework, this survey not only establishes a foundational reference for the community but also delineates key challenges and charts a roadmap for future research.
         </p>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="overview-section no-background">
+        <img src="timeline.png" alt="Timeline of VLAs" class="overview-image">
+        <p class="image-caption"><strong>Figure: Timeline of Foundational VLA Models and Efficient VLAs.</strong> The timeline illustrates the progression of foundational VLA models and efficient VLAs from 2023 to 2025, highlighting the explosive growth in enhancing the efficiency of VLA to bridge computational demands with real-world robotic deployment.</p>
+    </section>
+
+    <!-- Efficient Model Design Section -->
+    <section class="overview-section no-background">
+        <img src="efficient-architecture.png" alt="Efficient Model Design(1):Efficient Architectures" class="overview-image">
+        <p class="image-caption"><strong>Figure: Efficient Model Design(1):Efficient Architectures:</strong> We illustrate six primary approaches: <span class="label">(a)</span> Efficient Attention <span class="label">(b)</span> Transformer Alternatives <span class="label">(c)</span> Efficient Action Decoding <span class="label">(d)</span> Lightweight Components <span class="label">(e)</span> Mixture-of-Experts and <span class="label">(f)</span> Hierarchical Systems.</p>
+    </section>
+
+    <section class="overview-section no-background">
+        <img src="model-compression.png" alt="Efficient Model Design(2):Model Compression" class="overview-image">
+        <p class="image-caption"><strong>Figure: Efficient Model Design(2):Model Compression:</strong> We illustrate three primary approaches: <span class="label">(a)</span> Layer Pruning <span class="label">(b)</span> Quantization <span class="label">(c)</span> Token Optimization.</p>
+    </section>
+
+    <!-- Efficient Training Section -->
+    <section class="overview-section no-background">
+        <img src="efficient-training.png" alt="Efficient Training" class="overview-image">
+        <p class="image-caption"><strong>Figure: Efficient Training in VLAs, divided into two main stages.</strong> <span class="label">(a)</span> Efficient Pre-Training <span class="label">(b)</span> Efficient Post-Training.</p>
+    </section>
+
+    <!-- Efficient Data Collection Section -->
+    <section class="overview-section no-background">
+        <img src="data-collection.png" alt="Data Collection Strategies" class="overview-image-small">
+        <p class="image-caption"><strong>Figure: Efficient Data Collection Strategies in VLAs.</strong> This figure illustrates the primary approaches under efficient data collection, encompassing human-in-the-loop, simulated, reusability-oriented, self-driven, and augmentative techniques for scalable acquisition of high-quality robotic datasets while minimizing resource overhead.</p>
     </section>
 
     <!-- Paper List Section -->
